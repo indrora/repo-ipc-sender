@@ -10,6 +10,8 @@ on:
 jobs:
     ping:
         runs-on: ubuntu-latest
+        permissions:
+            actions: write
         steps:
         - name: Trigger target workflow
           run: |
@@ -20,3 +22,14 @@ jobs:
             -d '{"event_type": "ping", "client_payload": {"message": "${{inputs.message}}!"}}'
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatically generated GITHUB_TOKEN
+        - name: Trigger workflow X
+          id: trigger-workflow
+          uses: octokit/request-action
+          with:
+            route: /repos/{owner}/{repo}/dispatches
+            owner: indrora
+            repo: repo-ipc-receiver
+            event_type: ping
+            message: ${{inputs.message}}
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
