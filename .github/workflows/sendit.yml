@@ -1,6 +1,6 @@
 name: sender
 on:
-    workflow_call:
+    workflow_dispatch:
         inputs:
             message:
                 description: The message
