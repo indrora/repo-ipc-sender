@@ -26,10 +26,11 @@ jobs:
           id: trigger-workflow
           uses: octokit/request-action@v2.x
           with:
-            route: /repos/{owner}/{repo}/dispatches
+            route: POST /repos/{owner}/{repo}/dispatches
             owner: indrora
             repo: repo-ipc-receiver
             event_type: ping
-            message: ${{inputs.message}}
+            client_payload: |
+                {"message":"${{inputs.message}}"}
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
