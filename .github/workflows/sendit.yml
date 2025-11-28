@@ -24,9 +24,9 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatically generated GITHUB_TOKEN
         - name: Trigger workflow X
           id: trigger-workflow
-          uses: octokit/request-action
+          uses: octokit/request-action@v2.x
           with:
-            route: /{owner}/{repo}/dispatches
+            route: /repos/{owner}/{repo}/dispatches
             owner: indrora
             repo: repo-ipc-receiver
             event_type: ping
