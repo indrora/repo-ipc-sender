@@ -26,7 +26,7 @@ jobs:
           id: trigger-workflow
           uses: octokit/request-action
           with:
-            route: /repos/{owner}/{repo}/dispatches
+            route: /{owner}/{repo}/dispatches
             owner: indrora
             repo: repo-ipc-receiver
             event_type: ping
