@@ -1,0 +1,22 @@
+name: sender
+on:
+    workflow_call:
+        inputs:
+            message:
+                description: The message
+                default: "Hewwo uwu"
+                required: false
+                type: string 
+jobs:
+    ping:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Trigger target workflow
+          run: |
+            curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/indrora/repo-ipc-receiver/dispatches \
+            -d '{"event_type": "ping", "client_payload": {"message": "${{inputs.message}}!"}}'
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatically generated GITHUB_TOKEN
